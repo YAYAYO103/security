@@ -12,7 +12,6 @@ import java.util.List;
  */
 @Data
 public class MenuTree extends MenuEntity {
-
     /**
      * 子菜单
      */
