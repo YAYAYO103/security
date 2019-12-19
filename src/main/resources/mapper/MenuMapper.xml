@@ -12,8 +12,8 @@
         <result column="m_delete" property="mDelete" />
     </resultMap>
 
-    <resultMap id="Result_MenuTree" type="com.wangyu.mysecurity.bean.MenuTree" extends="BaseResultMap">
-        <collection property="children" ofType="com.wangyu.mysecurity.bean.MenuTree">
+    <resultMap id="Result_MenuTree" type="com.wangyu.mysecurity.bean.dto.MenuTree" extends="BaseResultMap">
+        <collection property="children" ofType="com.wangyu.mysecurity.bean.dto.MenuTree">
             <id column="m_id2" property="mId" />
             <result column="m_name2" property="mName" />
             <result column="m_url2" property="mUrl" />

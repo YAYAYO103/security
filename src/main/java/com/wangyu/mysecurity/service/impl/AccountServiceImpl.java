@@ -1,12 +1,9 @@
 package com.wangyu.mysecurity.service.impl;
 
-import cn.hutool.crypto.SecureUtil;
-import cn.hutool.crypto.digest.MD5;
-import cn.hutool.crypto.symmetric.AES;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.wangyu.mysecurity.bean.MenuTree;
+import com.wangyu.mysecurity.bean.dto.MenuTree;
 import com.wangyu.mysecurity.comment.Enums.Constants;
 import com.wangyu.mysecurity.comment.Result.R;
 import com.wangyu.mysecurity.comment.utils.CommentUtils;
@@ -15,14 +12,12 @@ import com.wangyu.mysecurity.entity.AccountEntity;
 import com.wangyu.mysecurity.mapper.AccountMapper;
 import com.wangyu.mysecurity.mapper.MenuMapper;
 import com.wangyu.mysecurity.service.AccountService;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

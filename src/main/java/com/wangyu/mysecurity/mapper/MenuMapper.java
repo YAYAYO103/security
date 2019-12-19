@@ -1,7 +1,7 @@
 package com.wangyu.mysecurity.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.wangyu.mysecurity.bean.MenuTree;
+import com.wangyu.mysecurity.bean.dto.MenuTree;
 import com.wangyu.mysecurity.entity.MenuEntity;
 
 import java.util.List;

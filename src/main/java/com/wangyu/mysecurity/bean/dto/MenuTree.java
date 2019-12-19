@@ -1,4 +1,4 @@
-package com.wangyu.mysecurity.bean;
+package com.wangyu.mysecurity.bean.dto;
 
 import com.wangyu.mysecurity.entity.MenuEntity;
 import lombok.Data;
