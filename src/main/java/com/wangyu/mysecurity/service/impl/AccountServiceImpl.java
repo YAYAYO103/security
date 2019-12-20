@@ -62,7 +62,7 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, AccountEntity
             return R.error("该用户不存在！");
         }
 
-        if(!password.equals(account.getAPassword())){
+        if(!password.equals(account.getPassword())){
             return R.error("密码不正确！");
         }
 
@@ -104,5 +104,26 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, AccountEntity
             });
         }
         return R.ok("注销成功！");
+    }
+
+    /**
+     * 新增账户
+     * @param accountEntity
+     * @return
+     */
+    @Override
+    public R addAccount(AccountEntity accountEntity) {
+        //根据账户名查询是否有这个账户信息
+        Integer count = this.baseMapper.selectCount(new QueryWrapper<AccountEntity>()
+                .eq("a_username", accountEntity.getUsername()));
+
+        if(count>0){
+            return R.error("该用户名已经存在！");
+        }
+
+        accountEntity.setAId(null);
+        this.baseMapper.insert(accountEntity);
+
+        return R.ok("新增账户信息成功！");
     }
 }

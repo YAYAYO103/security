@@ -4,8 +4,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.wangyu.mysecurity.comment.Result.R;
 import com.wangyu.mysecurity.entity.AccountEntity;
 
-import javax.servlet.http.HttpServletRequest;
-
 /**
  * <p>
  * 账户表 服务类
@@ -19,5 +17,7 @@ public interface AccountService extends IService<AccountEntity> {
     R login(String username,String password);
 
     R logOut();
+
+    R addAccount(AccountEntity accountEntity);
 
 }

@@ -3,6 +3,7 @@ package com.wangyu.mysecurity.comment.config;
 import com.wangyu.mysecurity.comment.Exception.RRException;
 import com.wangyu.mysecurity.comment.Result.R;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -25,6 +26,21 @@ public class GlobalExceptionHandler {
         if(e instanceof RRException){
             RRException r= (RRException) e;
             return R.error(r.getCode(),r.getMessage());
+        }
+        return R.error(e.getMessage());
+    }
+
+    /**
+     * 数据校验异常处理
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public R MethodArgumentNotValidExceptionHandler(Exception e){
+        log.error("校验异常：【{}】",e.getMessage());
+        if(e instanceof MethodArgumentNotValidException){
+            MethodArgumentNotValidException r= (MethodArgumentNotValidException) e;
+            return R.error(r.getBindingResult().getAllErrors().get(0).getDefaultMessage());
         }
         return R.error(e.getMessage());
     }

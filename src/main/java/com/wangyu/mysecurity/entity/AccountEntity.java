@@ -1,13 +1,14 @@
 package com.wangyu.mysecurity.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 /**
@@ -24,7 +25,7 @@ import java.io.Serializable;
 @TableName("account")
 public class AccountEntity implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID=12666L;
 
     /**
      * id
@@ -35,13 +36,16 @@ public class AccountEntity implements Serializable {
     /**
      * 登录名
      */
-    private String aUsername;
+    @NotBlank(message = "用户名不能为空！")
+    @TableField("a_username")
+    private String username;
 
     /**
      * 密码
      */
-    @JsonIgnore
-    private String aPassword;
+    @NotBlank(message = "密码不能为空！")
+    @TableField("a_password")
+    private String password;
 
 
 }

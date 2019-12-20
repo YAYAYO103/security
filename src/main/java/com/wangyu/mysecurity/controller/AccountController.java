@@ -1,12 +1,11 @@
 package com.wangyu.mysecurity.controller;
 
 import com.wangyu.mysecurity.comment.Result.R;
+import com.wangyu.mysecurity.entity.AccountEntity;
 import com.wangyu.mysecurity.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author YAYAYO
@@ -38,6 +37,17 @@ public class AccountController {
     @GetMapping("/logOut")
     public R logOut(){
         return accountService.logOut();
+    }
+
+    /**
+     * 新增账户
+     * @param
+     * @param
+     * @return
+     */
+    @PostMapping("/addAccount")
+    public R addAccount(@RequestBody @Validated AccountEntity entity){
+        return accountService.addAccount(entity);
     }
 
 }
