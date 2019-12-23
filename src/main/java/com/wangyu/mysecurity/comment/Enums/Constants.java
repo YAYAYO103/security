@@ -11,6 +11,8 @@ public class Constants {
     public static final String REDIS_MENU_SUFFIX=":menu";
     //redis账户后缀
     public static final String REDIS_ACCOUNT_SUFFIX=":account";
+    //redis中同一个用户的token（逗号拼接）
+    public static final String REDIS_ALL_TOKEN="all_token:";
     //redis数据的过期时间（秒）
     public static final Long REDIS_EXPIRE_TIME=7200L;
 

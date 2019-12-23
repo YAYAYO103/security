@@ -1,11 +1,14 @@
 package com.wangyu.mysecurity.controller;
 
 import com.wangyu.mysecurity.comment.Result.R;
+import com.wangyu.mysecurity.comment.validate.GroupOne;
 import com.wangyu.mysecurity.entity.AccountEntity;
 import com.wangyu.mysecurity.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 /**
  * @author YAYAYO
@@ -48,6 +51,17 @@ public class AccountController {
     @PostMapping("/addAccount")
     public R addAccount(@RequestBody @Validated AccountEntity entity){
         return accountService.addAccount(entity);
+    }
+
+    /**
+     * 编辑账户信息
+     * @param
+     * @param
+     * @return
+     */
+    @PostMapping("/updateAccount")
+    public R updateAccount(@RequestBody @Validated AccountEntity entity){
+        return accountService.updateAccount(entity);
     }
 
 }

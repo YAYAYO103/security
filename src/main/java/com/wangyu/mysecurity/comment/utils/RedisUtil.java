@@ -1,5 +1,6 @@
 package com.wangyu.mysecurity.comment.utils;
 
+import com.wangyu.mysecurity.comment.Enums.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.DataType;
@@ -25,6 +26,29 @@ public class RedisUtil {
 
 
     /** -------------------key相关操作--------------------- */
+
+    /**
+     * redis设置带过期时间的kv(7200s)
+     * @param key
+     */
+    public static void setExpireValue(String key,String value){
+        setExpireValue(key,value,Constants.REDIS_EXPIRE_TIME);
+    }
+
+    public static void setExpireValue(String key,String value,long expire){
+        set(key,value);
+        expire(key, expire,TimeUnit.SECONDS);
+    }
+
+    /**
+     * 删除key对应的数据
+     * @param key
+     */
+    public static void setExpire0L(String key){
+        if(hasKey(key)){
+            expire(key, 0L,TimeUnit.SECONDS);
+        }
+    }
 
     /**
      * 删除key

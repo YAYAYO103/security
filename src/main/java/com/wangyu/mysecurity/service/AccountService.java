@@ -20,4 +20,6 @@ public interface AccountService extends IService<AccountEntity> {
 
     R addAccount(AccountEntity accountEntity);
 
+    R updateAccount(AccountEntity accountEntity);
+
 }
