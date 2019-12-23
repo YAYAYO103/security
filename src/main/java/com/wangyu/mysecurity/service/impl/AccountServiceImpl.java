@@ -38,9 +38,6 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, AccountEntity
     @Autowired
     private MenuMapper menuMapper;
 
-    @Value("${AES.key}")
-    private String key;
-
     /**
      * 登录
      * @param username

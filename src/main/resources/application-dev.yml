@@ -28,6 +28,33 @@ logging:
   level:
     com.wangyu.mysecurity.mapper: debug
 
-#账户密码加密字符串
-AES:
-  key: "123999"
+#阿里云秘钥
+aliyun:
+  accessKeyId: xxxxx
+  accessKeySecret: xxxxx
+  oss:
+    #访问域名
+    bucket: http://myyayayo.oss-cn-shenzhen.aliyuncs.com/
+    #上传域名
+    endpoint: http://oss-cn-shenzhen.aliyuncs.com/
+    #你的存储空间名称
+    bucketName: myyayayo
+    #前缀
+    urlPrefix: image/
+
+# 七牛云配置
+qiniu:
+  #你的accessKey
+  accessKey: xxxxx
+  #你的secretKey
+  secretKey: xxxxx
+  #你的存储空间名称
+  bucket: myyayayo
+  #region0 region1 region2 regionNa0 regionAs0
+  zone: region0
+  #外链默认域名
+  domainOfBucket: http://q2xzcsayi.bkt.clouddn.com
+  # 链接过期时间，单位是秒，3600代表1小时，-1代表永不过期
+  expireInSeconds: -1
+  #前缀
+  urlPrefix: image/
