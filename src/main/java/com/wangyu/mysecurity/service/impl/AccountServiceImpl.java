@@ -5,6 +5,7 @@ import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wangyu.mysecurity.bean.dto.MenuTree;
+import com.wangyu.mysecurity.bean.request.LoginForm;
 import com.wangyu.mysecurity.comment.Enums.Constants;
 import com.wangyu.mysecurity.comment.Enums.ResultEnum;
 import com.wangyu.mysecurity.comment.Exception.RRException;
@@ -45,19 +46,14 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, AccountEntity
 
     /**
      * 登录
-     * @param username
-     * @param password
      * @return
      */
     @Override
-    public R login(String username, String password) {
-        if(StringUtils.isEmpty(username) || StringUtils.isEmpty(password)){
-            return R.error("参数校验不通过！");
-        }
+    public R login(LoginForm form) {
 
         //根据用户名查询用户信息
         AccountEntity account = this.baseMapper.selectOne(new QueryWrapper<AccountEntity>()
-                .eq("a_username", username)
+                .eq("a_account", form.getAccount())
                 .last("limit 1"));
 
         if(account==null){
@@ -65,7 +61,7 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, AccountEntity
         }
 
         //MD5加密后的密码对比
-        password= SecureUtil.md5(password);
+        String password= SecureUtil.md5(form.getPassword());
         if(!password.equals(account.getPassword())){
             return R.error("密码不正确！");
         }
@@ -81,14 +77,14 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, AccountEntity
         //菜单存入redis
         RedisUtil.setExpireValue(CommentUtils.redisGetAccountMenus(token),JSONUtil.toJsonStr(menuTrees));
 
-        String allToken = RedisUtil.get(Constants.REDIS_ALL_TOKEN+username);
+        String allToken = RedisUtil.get(Constants.REDIS_ALL_TOKEN+account.getAccount());
         if(StringUtils.isEmpty(allToken)){
             //新存入 用于后面的用户踢出功能 用户名为key，token为value
-            RedisUtil.setExpireValue(CommentUtils.redisGetAllToken(username),token);
+            RedisUtil.setExpireValue(CommentUtils.redisGetAllToken(account.getAccount()),token);
         }else {
             //逗号拼接
             String value=allToken+","+token;
-            RedisUtil.setExpireValue(CommentUtils.redisGetAllToken(username),value);
+            RedisUtil.setExpireValue(CommentUtils.redisGetAllToken(account.getAccount()),value);
         }
 
         //封装返回参数
@@ -118,7 +114,7 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, AccountEntity
     public R addAccount(AccountEntity accountEntity) {
         //根据账户名查询是否有这个账户信息
         Integer count = this.baseMapper.selectCount(new QueryWrapper<AccountEntity>()
-                .eq("a_username", accountEntity.getUsername()));
+                .eq("a_account", accountEntity.getAccount()));
 
         if(count>0){
             return R.error("该用户名已经存在！");

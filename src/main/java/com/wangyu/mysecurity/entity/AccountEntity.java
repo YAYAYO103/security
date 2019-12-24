@@ -41,8 +41,8 @@ public class AccountEntity implements Serializable {
      * 登录名
      */
     @NotBlank(message = "用户名不能为空！")
-    @TableField("a_username")
-    private String username;
+    @TableField("a_account")
+    private String account;
 
     /**
      * 密码

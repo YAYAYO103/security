@@ -1,10 +1,7 @@
 package com.wangyu.mysecurity.comment.utils;
 
-import cn.hutool.core.lang.UUID;
 import cn.hutool.core.util.IdUtil;
-import cn.hutool.crypto.SecureUtil;
 import cn.hutool.json.JSONUtil;
-import com.google.common.base.Strings;
 import com.wangyu.mysecurity.comment.Enums.Constants;
 import com.wangyu.mysecurity.comment.Enums.ResultEnum;
 import com.wangyu.mysecurity.comment.Exception.RRException;
@@ -116,7 +113,7 @@ public class CommentUtils {
 
         //获得账户名称
         AccountEntity entity=JSONUtil.toBean(account,AccountEntity.class);
-        String accountName=entity.getUsername();
+        String accountName=entity.getAccount();
 
         //用户菜单过期
         RedisUtil.setExpire0L(redisGetAccountMenus(token));
@@ -144,6 +141,7 @@ public class CommentUtils {
 
         return true;
     }
+
     /**
      * 踢出账户最早的token信息
      * @return
@@ -158,6 +156,7 @@ public class CommentUtils {
         String[] tokens = alltoken.split(",");
         String firstToken=tokens[0];
 
+        //注销这个token
         return redisAccountLogOut(firstToken);
     }
 

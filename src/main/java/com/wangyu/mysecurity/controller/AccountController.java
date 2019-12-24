@@ -1,5 +1,6 @@
 package com.wangyu.mysecurity.controller;
 
+import com.wangyu.mysecurity.bean.request.LoginForm;
 import com.wangyu.mysecurity.comment.Result.R;
 import com.wangyu.mysecurity.comment.validate.GroupOne;
 import com.wangyu.mysecurity.entity.AccountEntity;
@@ -26,9 +27,9 @@ public class AccountController {
      * 登录
      * @return
      */
-    @GetMapping("/login")
-    public R test(String username, String password){
-        return accountService.login(username,password);
+    @PostMapping("/login")
+    public R test(@RequestBody @Validated LoginForm form){
+        return accountService.login(form);
     }
 
     /**

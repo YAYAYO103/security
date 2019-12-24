@@ -1,6 +1,7 @@
 package com.wangyu.mysecurity.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.wangyu.mysecurity.bean.request.LoginForm;
 import com.wangyu.mysecurity.comment.Result.R;
 import com.wangyu.mysecurity.entity.AccountEntity;
 
@@ -14,7 +15,7 @@ import com.wangyu.mysecurity.entity.AccountEntity;
  */
 public interface AccountService extends IService<AccountEntity> {
 
-    R login(String username,String password);
+    R login(LoginForm form);
 
     R logOut();
 
