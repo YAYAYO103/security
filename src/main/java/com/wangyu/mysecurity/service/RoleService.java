@@ -1,6 +1,7 @@
 package com.wangyu.mysecurity.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.wangyu.mysecurity.comment.Result.R;
 import com.wangyu.mysecurity.entity.RoleEntity;
 
 /**
@@ -12,5 +13,7 @@ import com.wangyu.mysecurity.entity.RoleEntity;
  * @since 2019-12-19
  */
 public interface RoleService extends IService<RoleEntity> {
+
+    R addRole(RoleEntity entity);
 
 }

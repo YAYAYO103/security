@@ -51,5 +51,17 @@ public class AccountEntity implements Serializable {
     @TableField("a_password")
     private String password;
 
+    /**
+     * 账号状态
+     */
+    @TableField("a_type")
+    private boolean type;
+
+    /**
+     *账号级别（1超级管理员 2普通用户）
+     */
+    @TableField("a_level")
+    private Integer level;
+
 
 }

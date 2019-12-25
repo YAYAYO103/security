@@ -23,4 +23,6 @@ public interface AccountService extends IService<AccountEntity> {
 
     R updateAccount(AccountEntity accountEntity);
 
+    R lockAccount(Integer id);
+
 }

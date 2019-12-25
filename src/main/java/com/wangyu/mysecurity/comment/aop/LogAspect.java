@@ -5,6 +5,7 @@ import cn.hutool.json.JSONUtil;
 import com.wangyu.mysecurity.comment.Enums.Constants;
 import com.wangyu.mysecurity.comment.Enums.ResultEnum;
 import com.wangyu.mysecurity.comment.Exception.RRException;
+import com.wangyu.mysecurity.comment.Local;
 import com.wangyu.mysecurity.comment.Result.R;
 import com.wangyu.mysecurity.comment.utils.CommentUtils;
 import com.wangyu.mysecurity.comment.utils.RedisUtil;
@@ -73,6 +74,38 @@ public class LogAspect{
     }
 
     /**
+     * @description: 字符串解析表达式
+     * @author YAYAYO
+     * @date 2019.12.25 025
+     */
+    private String generateKeyByLocal(String str,String[] parameters){
+        if(StringUtils.isEmpty(str) || parameters.length<1){
+            return "";
+        }
+
+        StringBuilder sb=new StringBuilder();
+        char[] value = str.toCharArray();
+        Integer count=0;
+        for (int i = 0; i < value.length; i++) {
+
+            if(count>=parameters.length){
+                sb.append(value[i]);
+                continue;
+            }
+
+            if('{'==value[i] && '}'==value[i+1]){
+                sb.append(parameters[count]);
+                count++;
+                i++;
+                continue;
+            }
+
+            sb.append(value[i]);
+        }
+        return sb.toString();
+    }
+
+    /**
      * @description: 定义切点
      * @author YAYAYO
      * @date 2019.12.25 025
@@ -106,9 +139,20 @@ public class LogAspect{
         //有  就记录日志
         String value = logger.value();
 
-        if(StringUtils.hasText("#{#")){
-            //替换spel表达式
+        Constants.LogTypeEnum type = logger.type();
+        if(Constants.LogTypeEnum.NORMAL==type){
+            //直接记录数据库 无需处理
+
+        }else if(Constants.LogTypeEnum.SPEL==type){
+            //spel表达式处理
             value= this.generateKeyBySpEL(value, joinPoint);
+
+        }else if(Constants.LogTypeEnum.THREADLOCAL==type){
+            //ThreadLocal处理
+            String[] parameters = Local.getThreadLocal().get();
+            value=this.generateKeyByLocal(value,parameters);
+            Local.clear();
+
         }
 
         //记录日志

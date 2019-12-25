@@ -16,6 +16,10 @@ public class Constants {
     //redis数据的过期时间（秒）
     public static final Long REDIS_EXPIRE_TIME=7200L;
 
+    //日志通用常量
+    public static final String LOG_ACCOUNT_LOCK="冻结";
+    public static final String LOG_ACCOUNT_UNLOCK="解冻";
+
     /**
      * 账户状态
      */
@@ -27,6 +31,38 @@ public class Constants {
         ;
         private int code;
         private String msg;
+    }
+
+    /**
+     * @description: 账户等级
+     * @author YAYAYO
+     * @date 2019.12.25 025
+     */
+    @Getter
+    @AllArgsConstructor
+    public enum  AccountLevelEnum{
+        IS_ADMIN(1,"超级管理员"),
+        IS_NOT_ADMIN(2,"普通账户"),
+        ;
+        private int code;
+        private String msg;
+    }
+
+    /**
+     * @description: 日志解析方式
+     * @author YAYAYO
+     * @date 2019.12.25 025
+     */
+    @Getter
+    @AllArgsConstructor
+    public enum  LogTypeEnum{
+        //不需要处理  直接存入数据库
+        NORMAL,
+        //spel表达式解析
+        SPEL,
+        //threadLocal参数解析
+        THREADLOCAL,
+        ;
     }
 
 }

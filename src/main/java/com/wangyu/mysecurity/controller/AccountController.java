@@ -1,6 +1,7 @@
 package com.wangyu.mysecurity.controller;
 
 import com.wangyu.mysecurity.bean.request.LoginForm;
+import com.wangyu.mysecurity.comment.Enums.Constants;
 import com.wangyu.mysecurity.comment.Result.R;
 import com.wangyu.mysecurity.comment.aop.Log;
 import com.wangyu.mysecurity.comment.validate.GroupOne;
@@ -30,7 +31,7 @@ public class AccountController {
      * @date 2019.12.24 024
      */
     @PostMapping("/login")
-    @Log("【#{#form.account}】用户登录")
+    @Log(value = "【#{#form.account}】用户登录",type = Constants.LogTypeEnum.SPEL)
     public R test(@RequestBody @Validated LoginForm form){
         return accountService.login(form);
     }
@@ -66,6 +67,17 @@ public class AccountController {
     @PostMapping("/updateAccount")
     public R updateAccount(@RequestBody @Validated AccountEntity entity){
         return accountService.updateAccount(entity);
+    }
+
+    /**
+     * @description: 账户解锁或者冻结
+     * @author YAYAYO
+     * @date 2019.12.25 025
+     */
+    @Log(value = "{}用户将账号{}",type = Constants.LogTypeEnum.THREADLOCAL)
+    @GetMapping("/lockAccount")
+    public R lockAccount(Integer id){
+        return accountService.lockAccount(id);
     }
 
 }
