@@ -2,6 +2,7 @@ package com.wangyu.mysecurity.controller;
 
 import com.wangyu.mysecurity.bean.request.LoginForm;
 import com.wangyu.mysecurity.comment.Result.R;
+import com.wangyu.mysecurity.comment.aop.Log;
 import com.wangyu.mysecurity.comment.validate.GroupOne;
 import com.wangyu.mysecurity.entity.AccountEntity;
 import com.wangyu.mysecurity.service.AccountService;
@@ -24,10 +25,12 @@ public class AccountController {
     private AccountService accountService;
 
     /**
-     * 登录
-     * @return
+     * @description: 登录
+     * @author YAYAYO
+     * @date 2019.12.24 024
      */
     @PostMapping("/login")
+    @Log("【#{#form.account}】用户登录")
     public R test(@RequestBody @Validated LoginForm form){
         return accountService.login(form);
     }

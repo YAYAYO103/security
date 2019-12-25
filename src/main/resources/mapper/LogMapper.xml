@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wangyu.mysecurity.mapper.LogMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.wangyu.mysecurity.entity.LogEntity">
+        <id column="l_id" property="lId" />
+        <result column="l_account" property="lAccount" />
+        <result column="l_ip" property="lIp" />
+        <result column="l_description" property="lDescription" />
+        <result column="create_time" property="createTime" />
+    </resultMap>
+
+</mapper>

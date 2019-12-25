@@ -23,6 +23,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(RRException.class)
     public R RRExceptionHandler(Exception e){
         log.error("异常：【{}】",e.getMessage());
+        e.printStackTrace();
         if(e instanceof RRException){
             RRException r= (RRException) e;
             return R.error(r.getCode(),r.getMessage());
