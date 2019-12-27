@@ -27,11 +27,14 @@ mybatis-plus:
 logging:
   level:
     com.wangyu.mysecurity.mapper: debug
+  file:
+    path: /logs/
+    name: mysecurity.log
 
 #阿里云秘钥
 aliyun:
-  accessKeyId: xxxxx
-  accessKeySecret: xxxxx
+  accessKeyId: xxx
+  accessKeySecret: xxx
   oss:
     #访问域名
     bucket: http://myyayayo.oss-cn-shenzhen.aliyuncs.com/
@@ -45,9 +48,9 @@ aliyun:
 # 七牛云配置
 qiniu:
   #你的accessKey
-  accessKey: xxxxx
+  accessKey: xxx
   #你的secretKey
-  secretKey: xxxxx
+  secretKey: xxx
   #你的存储空间名称
   bucket: myyayayo
   #region0 region1 region2 regionNa0 regionAs0
