@@ -1,7 +1,9 @@
 package com.wangyu.mysecurity.controller;
 
 import com.wangyu.mysecurity.comment.Result.R;
+import com.wangyu.mysecurity.comment.aop.Anonymous;
 import com.wangyu.mysecurity.comment.utils.AliyunUtil;
+import com.wangyu.mysecurity.comment.utils.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +21,9 @@ import org.springframework.web.multipart.MultipartFile;
 public class TestController {
 
     @PostMapping("/a")
+    @Anonymous
     public R test(){
+        RedisUtil.setExpireValue("test","value",5L);
         return R.ok("成功！");
     }
 
